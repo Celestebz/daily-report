@@ -123,6 +123,8 @@ def fetch_emails(user, password, since_date, before_date):
 
 def main():
     _check_env()
+    # Windows 下 stdout 默认是 gbk，JSON 含中文时可能崩
+    sys.stdout.reconfigure(encoding='utf-8')
     parser = argparse.ArgumentParser(description="拉取 IMAP 邮件")
     parser.add_argument("--days", type=int, default=1, help="拉取最近 N 天（默认 1）")
     parser.add_argument("--weekly", action="store_true", help="拉取本周（周一至今）")
